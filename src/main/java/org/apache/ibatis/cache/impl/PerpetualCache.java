@@ -23,6 +23,8 @@ import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheException;
 
 /**
+ * 基础的Cache类，使用HashMap实现缓存功能
+ * Perpetual是永久的意思
  * @author Clinton Begin
  */
 public class PerpetualCache implements Cache {

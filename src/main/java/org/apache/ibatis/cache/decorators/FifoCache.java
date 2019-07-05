@@ -22,6 +22,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * 装饰模式(decorator)：装饰模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案，提供比继承更多的灵活性。
  * FIFO (first in, first out) cache decorator.
  *
  * @author Clinton Begin
@@ -29,9 +30,16 @@ import org.apache.ibatis.cache.Cache;
 public class FifoCache implements Cache {
 
   private final Cache delegate;
+  /**
+   * 先进先出用队列实现
+   */
   private final Deque<Object> keyList;
   private int size;
 
+  /**
+   * 使用链表实现，默认大小为1024，使用委托模式，具体操作委托给delegate
+   * @param delegate
+   */
   public FifoCache(Cache delegate) {
     this.delegate = delegate;
     this.keyList = new LinkedList<>();
@@ -79,6 +87,10 @@ public class FifoCache implements Cache {
     return null;
   }
 
+  /**
+   * 循环缓存Key值，Cache大小为1024，基于FIFO，更新key值
+   * @param key
+   */
   private void cycleKeyList(Object key) {
     keyList.addLast(key);
     if (keyList.size() > size) {

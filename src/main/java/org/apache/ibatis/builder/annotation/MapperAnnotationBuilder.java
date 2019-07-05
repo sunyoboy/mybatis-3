@@ -92,6 +92,8 @@ import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.UnknownTypeHandler;
 
 /**
+ * Mybatis Mapper 注解构建器
+ * @author sunlijiang
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
@@ -296,6 +298,10 @@ public class MapperAnnotationBuilder {
     return null;
   }
 
+  /**
+   * 解析statement, 即将xxxMapper类中增删改查方法解析为Statement
+   * @param method
+   */
   void parseStatement(Method method) {
     Class<?> parameterTypeClass = getParameterType(method);
     LanguageDriver languageDriver = getLanguageDriver(method);
