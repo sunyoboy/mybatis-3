@@ -52,6 +52,16 @@ public class LruCache implements Cache {
    * @param size
    */
   public void setSize(final int size) {
+    /**
+     * accessOrder LinkedHashMap增加了两个属性用于保证迭代顺序，
+     * 分别是双向链表头结点header 和 标志位accessOrder
+     * (值为true时，表示按照访问顺序迭代；值为false时，表示按照插入顺序迭代)
+     * LinkedHashMap重写了HashMap中的recordAccess方法（HashMap中该方法为空），当调用父类的put方法时，
+     * 在发现key已经存在时，会调用该方法；当调用自己的get方法时，也会调用到该方法。
+     * 该方法提供了LRU算法的实现，它将最近使用的Entry放到双向循环链表的尾部。也就是说，当accessOrder为true时，
+     * get方法和put方法都会调用recordAccess方法使得最近使用的Entry移到双向链表的末尾；
+     * 当accessOrder为默认值false时，从源码中可以看出recordAccess方法什么也不会做。
+     */
     keyMap = new LinkedHashMap<Object, Object>(size, .75F, true) {
       private static final long serialVersionUID = 4267176411845948333L;
 
@@ -98,6 +108,7 @@ public class LruCache implements Cache {
     keyMap.put(key, key);
     if (eldestKey != null) {
       delegate.removeObject(eldestKey);
+      // 不使用的对象手动赋值为null
       eldestKey = null;
     }
   }
