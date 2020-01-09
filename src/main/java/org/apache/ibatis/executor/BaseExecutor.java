@@ -136,6 +136,18 @@ public abstract class BaseExecutor implements Executor {
     return query(ms, parameter, rowBounds, resultHandler, key, boundSql);
  }
 
+  /**
+   * 查询记录，如果在缓存中直接返回，否则查数据库
+   * @param ms
+   * @param parameter
+   * @param rowBounds
+   * @param resultHandler
+   * @param key
+   * @param boundSql
+   * @param <E>
+   * @return
+   * @throws SQLException
+   */
   @SuppressWarnings("unchecked")
   @Override
   public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
@@ -317,6 +329,18 @@ public abstract class BaseExecutor implements Executor {
     }
   }
 
+  /**
+   * localCache 的KEY: -146148924:4883974749:com.hcm.performance.workflow.dao.PfmFlowRunTaskDataDao.getRunTaskDataByActTaskId:0:2147483647:select * from hcm_pfm_flow_run_task_data   where act_ins_task_id = ? limit 1:1132756:SqlSessionFactoryBean
+   * @param ms
+   * @param parameter
+   * @param rowBounds
+   * @param resultHandler
+   * @param key
+   * @param boundSql
+   * @param <E>
+   * @return
+   * @throws SQLException
+   */
   private <E> List<E> queryFromDatabase(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
     List<E> list;
     localCache.putObject(key, EXECUTION_PLACEHOLDER);

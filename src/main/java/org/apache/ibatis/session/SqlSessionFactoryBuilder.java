@@ -88,6 +88,11 @@ public class SqlSessionFactoryBuilder {
     }
   }
 
+  /**
+   * LocalContainerEntityManagerFactoryBean
+   * @param config
+   * @return
+   */
   public SqlSessionFactory build(Configuration config) {
     return new DefaultSqlSessionFactory(config);
   }

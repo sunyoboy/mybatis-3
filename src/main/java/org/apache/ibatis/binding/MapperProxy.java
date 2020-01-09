@@ -27,6 +27,12 @@ import org.apache.ibatis.reflection.ExceptionUtil;
 import org.apache.ibatis.session.SqlSession;
 
 /**
+ * @author sunyoboy
+ *
+ * 为Mapper/Dao层接口的代理类
+ */
+
+/**
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
@@ -34,7 +40,15 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
 
   private static final long serialVersionUID = -6424540398559729838L;
   private final SqlSession sqlSession;
+
+  /**
+   * 对应Dao/Mapper层的接口。举例UserMapper
+   */
   private final Class<T> mapperInterface;
+
+  /**
+   * UserMapper接口中方法的缓存
+   */
   private final Map<Method, MapperMethod> methodCache;
 
   public MapperProxy(SqlSession sqlSession, Class<T> mapperInterface, Map<Method, MapperMethod> methodCache) {
@@ -43,6 +57,15 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     this.methodCache = methodCache;
   }
 
+  /**
+   * 技术反射
+   * 执行查询方法的入口
+   * @param proxy
+   * @param method
+   * @param args
+   * @return
+   * @throws Throwable
+   */
   @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     try {
@@ -55,6 +78,10 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
       throw ExceptionUtil.unwrapThrowable(t);
     }
     final MapperMethod mapperMethod = cachedMapperMethod(method);
+
+    /**
+     * 执行SQL命令
+     */
     return mapperMethod.execute(sqlSession, args);
   }
 

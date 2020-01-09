@@ -51,6 +51,12 @@ public class MapperMethod {
     this.method = new MethodSignature(config, mapperInterface, method);
   }
 
+  /**
+   * args 为SQL查询参数
+   * @param sqlSession
+   * @param args
+   * @return
+   */
   public Object execute(SqlSession sqlSession, Object[] args) {
     Object result;
     switch (command.getType()) {
@@ -134,6 +140,14 @@ public class MapperMethod {
     }
   }
 
+  /**
+   * 返回结果为List
+   * 调用SqlSession的selectList方法
+   * @param sqlSession
+   * @param args
+   * @param <E>
+   * @return
+   */
   private <E> Object executeForMany(SqlSession sqlSession, Object[] args) {
     List<E> result;
     Object param = method.convertArgsToSqlCommandParam(args);
@@ -215,7 +229,15 @@ public class MapperMethod {
 
   public static class SqlCommand {
 
+    /**
+     * 为对应的类+方法名
+     * 实例：com.xxx.dao.BacklogViewDao.listAllByStatusAndTag
+     */
     private final String name;
+
+    /**
+     * type 为SELECT 或 UPDATE
+     */
     private final SqlCommandType type;
 
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
@@ -276,6 +298,10 @@ public class MapperMethod {
     private final boolean returnsVoid;
     private final boolean returnsCursor;
     private final boolean returnsOptional;
+
+    /**
+     * Dao/Mapper方法的返回类型
+     */
     private final Class<?> returnType;
     private final String mapKey;
     private final Integer resultHandlerIndex;

@@ -175,7 +175,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   }
 
   //
-  // HANDLE RESULT SETS
+  // HANDLE RESULT SETS 处理结果集, 不会返回null
   //
   @Override
   public List<Object> handleResultSets(Statement stmt) throws SQLException {
