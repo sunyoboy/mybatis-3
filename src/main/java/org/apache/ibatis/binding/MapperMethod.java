@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ *    Copyright 2009-2020 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -53,6 +53,7 @@ public class MapperMethod {
 
   /**
    * args 为SQL查询参数
+   * 解析SQL命令，执行对应处理逻辑
    * @param sqlSession
    * @param args
    * @return
@@ -308,6 +309,12 @@ public class MapperMethod {
     private final Integer rowBoundsIndex;
     private final ParamNameResolver paramNameResolver;
 
+    /**
+     * 根据方法签名，确定返回结果类型，及返回类型标识returnsMany
+     * @param configuration
+     * @param mapperInterface
+     * @param method
+     */
     public MethodSignature(Configuration configuration, Class<?> mapperInterface, Method method) {
       Type resolvedReturnType = TypeParameterResolver.resolveReturnType(method, mapperInterface);
       if (resolvedReturnType instanceof Class<?>) {
