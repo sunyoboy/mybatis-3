@@ -19,15 +19,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Wraps a database connection.
+ * Wraps a database connection. 包装数据库连接
  * Handles the connection lifecycle that comprises: its creation, preparation, commit/rollback and close.
- *
+ * 处理连接生命周期： 连接创建、准备，提交/回滚，关闭
  * @author Clinton Begin
  */
 public interface Transaction {
 
   /**
-   * Retrieve inner database connection
+   * Retrieve inner database connection 检索
    * @return DataBase connection
    * @throws SQLException
    */

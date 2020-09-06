@@ -331,6 +331,8 @@ public abstract class BaseExecutor implements Executor {
 
   /**
    * localCache 的KEY: -146148924:4883974749:com.hcm.performance.workflow.dao.PfmFlowRunTaskDataDao.getRunTaskDataByActTaskId:0:2147483647:select * from hcm_pfm_flow_run_task_data   where act_ins_task_id = ? limit 1:1132756:SqlSessionFactoryBean
+   * 713077353:4851558674:com.lieve.mapper.BlogMapper.getById:0:2147483647:select id, title, content from blog:dev
+   * hashcode:checksum:updateList[0]:updateList[1]:updateList[2]:updateList[3]:updateList[4]
    * @param ms
    * @param parameter
    * @param rowBounds
@@ -349,6 +351,10 @@ public abstract class BaseExecutor implements Executor {
     } finally {
       localCache.removeObject(key);
     }
+
+    /**
+     * localCache缓存查询结果
+     */
     localCache.putObject(key, list);
     if (ms.getStatementType() == StatementType.CALLABLE) {
       localOutputParameterCache.putObject(key, parameter);

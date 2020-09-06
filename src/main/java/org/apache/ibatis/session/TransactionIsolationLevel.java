@@ -18,6 +18,11 @@ package org.apache.ibatis.session;
 import java.sql.Connection;
 
 /**
+ * 事务隔离级别
+ * 读已提交
+ * 读未提交（不可重复读）
+ * 可重复读
+ * 串行化
  * @author Clinton Begin
  */
 public enum TransactionIsolationLevel {

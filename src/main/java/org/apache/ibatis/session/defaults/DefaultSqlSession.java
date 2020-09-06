@@ -55,6 +55,12 @@ public class DefaultSqlSession implements SqlSession {
   private boolean dirty;
   private List<Cursor<?>> cursorList;
 
+  /**
+   * 默认SqlSession
+   * @param configuration
+   * @param executor
+   * @param autoCommit
+   */
   public DefaultSqlSession(Configuration configuration, Executor executor, boolean autoCommit) {
     this.configuration = configuration;
     this.executor = executor;
@@ -213,6 +219,9 @@ public class DefaultSqlSession implements SqlSession {
     return update(statement, parameter);
   }
 
+  /**
+   * commit
+   */
   @Override
   public void commit() {
     commit(false);

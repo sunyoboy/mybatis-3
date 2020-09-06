@@ -121,6 +121,10 @@ public class Configuration {
   protected Set<String> lazyLoadTriggerMethods = new HashSet<>(Arrays.asList("equals", "clone", "hashCode", "toString"));
   protected Integer defaultStatementTimeout;
   protected Integer defaultFetchSize;
+
+  /**
+   * 默认执行器类型
+   */
   protected ExecutorType defaultExecutorType = ExecutorType.SIMPLE;
   protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
   protected AutoMappingUnknownColumnBehavior autoMappingUnknownColumnBehavior = AutoMappingUnknownColumnBehavior.NONE;
@@ -583,6 +587,7 @@ public class Configuration {
 
     /**
      * 一级缓存默认开启
+     * Configuration#cacheEnabled 一级缓存是否开启
      */
     if (cacheEnabled) {
       executor = new CachingExecutor(executor);
